@@ -1,0 +1,18 @@
+name: circular_carousel_slider
+description: "A circular carousel slider is a widget that displays content in a circular motion, allowing for continuous scrolling through the items."
+version: 0.0.1
+author: Damian "Damrad" Radecki<damianradecki97@gmail.com>
+homepage:
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+  flutter: ">=3.16.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.1
