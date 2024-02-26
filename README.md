@@ -86,7 +86,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-### Aspect Ratio
+### Current page
 
 To get the current page index, we can use `onPageChanged` callback.
 

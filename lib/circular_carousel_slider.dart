@@ -3,9 +3,10 @@ library circular_carousel_slider;
 import 'dart:math';
 
 import 'package:circular_carousel_slider/circular_carousel_controller.dart';
-import 'package:circular_carousel_slider/circular_carousel_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/physics.dart';
+
+part 'circular_carousel_item.dart';
 
 class CircularCarouselSlider extends StatefulWidget {
   final double aspectRatio;
@@ -22,14 +23,15 @@ class CircularCarouselSlider extends StatefulWidget {
   });
 
   @override
-  State<CircularCarouselSlider> createState() => AppCarouselStateSlider();
+  State<CircularCarouselSlider> createState() => _CircularCarouselSliderState();
 }
 
-class AppCarouselStateSlider extends State<CircularCarouselSlider> with TickerProviderStateMixin {
+class _CircularCarouselSliderState extends State<CircularCarouselSlider>
+    with TickerProviderStateMixin {
   AnimationController? _frontCardCtrl;
   AnimationController? _frictionCtrl;
 
-  List<CircularCarouselItem> itemsList = [];
+  List<_CircularCarouselItem> itemsList = [];
   double radius = 0.0;
 
   double angleStep = 0;
@@ -43,8 +45,11 @@ class AppCarouselStateSlider extends State<CircularCarouselSlider> with TickerPr
   void initState() {
     super.initState();
 
-    itemsList =
-        widget.children.asMap().map((key, value) => MapEntry(key, CircularCarouselItem(key, value))).values.toList();
+    itemsList = widget.children
+        .asMap()
+        .map((key, value) => MapEntry(key, _CircularCarouselItem(key, value)))
+        .values
+        .toList();
     angleStep = -(pi * 2) / widget.children.length;
 
     _frontCardCtrl?.dispose();
@@ -55,7 +60,7 @@ class AppCarouselStateSlider extends State<CircularCarouselSlider> with TickerPr
     _frictionCtrl = AnimationController.unbounded(vsync: this);
     _frictionCtrl?.addListener(() => setState(() {}));
 
-    final CircularCarouselItem maxZ = itemsList.reduce(
+    final _CircularCarouselItem maxZ = itemsList.reduce(
       (curr, next) => curr.z > next.z ? curr : next,
     );
     _frontCardAnimation(
@@ -107,7 +112,7 @@ class AppCarouselStateSlider extends State<CircularCarouselSlider> with TickerPr
     );
   }
 
-  Widget addCard(CircularCarouselItem cardData) {
+  Widget addCard(_CircularCarouselItem cardData) {
     final double cardAlpha = 0.75 + 0.25 * cardData.z / radius;
     return Opacity(
       opacity: cardAlpha,
@@ -124,10 +129,11 @@ class AppCarouselStateSlider extends State<CircularCarouselSlider> with TickerPr
 
     final double beginAngle = angleOffset - pi / 2;
 
-    final FrictionSimulation simulate = FrictionSimulation(.00001, beginAngle, -_velocityX * .006);
+    final FrictionSimulation simulate =
+        FrictionSimulation(.00001, beginAngle, -_velocityX * .006);
     _frictionCtrl?.animateWith(simulate).whenComplete(() {
       // re-center the front card
-      final CircularCarouselItem maxZ = itemsList.reduce(
+      final _CircularCarouselItem maxZ = itemsList.reduce(
         (curr, next) => curr.z > next.z ? curr : next,
       );
       _frontCardAnimation(maxZ.index);
@@ -185,7 +191,7 @@ class AppCarouselStateSlider extends State<CircularCarouselSlider> with TickerPr
   void _positionCardsInCircle() {
     // positioning cards in a circle
     for (var i = 0; i < itemsList.length; ++i) {
-      final CircularCarouselItem cardData = itemsList[i];
+      final _CircularCarouselItem cardData = itemsList[i];
       final double ang = angleOffset + cardData.index * angleStep;
       cardData.angle = ang;
       cardData.x = cos(ang) * radius;
