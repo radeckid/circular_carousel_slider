@@ -1,8 +1,6 @@
-library circular_carousel_slider;
+part of 'circular_carousel_slider.dart';
 
-import 'package:flutter/material.dart';
-
-class CircularCarouselItem {
+class _CircularCarouselItem {
   late double x;
   late double y;
   late double z;
@@ -10,7 +8,7 @@ class CircularCarouselItem {
   final int index;
   final Widget widget;
 
-  CircularCarouselItem(this.index, this.widget)
+  _CircularCarouselItem(this.index, this.widget)
       : x = 0,
         y = 0,
         z = 0,
