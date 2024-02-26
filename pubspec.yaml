@@ -1,6 +1,6 @@
 name: circular_carousel_slider
 description: "A circular carousel slider is a widget that displays content in a circular motion, allowing for continuous scrolling through the items."
-version: 0.0.1
+version: 0.0.2
 homepage: https://github.com/radeckid/circular_carousel_slider
 repository: https://github.com/radeckid/circular_carousel_slider
 
