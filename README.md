@@ -11,7 +11,6 @@ Add the module to your project ``pubspec.yaml``:
 ```yaml
 ...
 dependencies:
- ...
  circular_carousel_slider: ^0.0.1
 ...
 ```
@@ -105,7 +104,7 @@ Widget build(BuildContext context) {
 }
 ```
 
-<img src="images/example.gif" width="300" >
+<img src="https://github.com/radeckid/circular_carousel_slider/blob/main/images/example.gif" width="300"  alt="Example circular_carousel_slider">
 
 ## Credits
 
